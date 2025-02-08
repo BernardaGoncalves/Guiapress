@@ -40,7 +40,8 @@ app.get("/", (req,res) => {
     Article.findAll({
         order: [
             ['id', 'DESC'] 
-        ]
+        ],
+        limit: 4
     }).then(articles => {
         Category.findAll().then(categories => {
             res.render("index", {articles: articles, categories: categories})
@@ -86,6 +87,7 @@ app.get("/category/:slug", (req, res) => {
         res.redirect("/")
     })
 })
+
 app.listen(8081, () => {
     console.log("O servidor esta rodando")
 })
