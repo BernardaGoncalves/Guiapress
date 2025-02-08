@@ -7,13 +7,18 @@
                 <h2>Editar Artigo</h2>
             </div>
             <div class="card-body">
-            <form method="POST" action="/articles/save">
-                <input class="form-control" type="text" name="title" placeholder="Defina o titulo do Artigo"><br>
-                <textarea class="form-control" name="body" id="article" placeholder="Escreva o seu aartigo"></textarea><br>
+            <form method="POST" action="/articles/update">
+                <input type="hidden" value="<%= article.id %>" name="id">
+                <input class="form-control" type="text" name="title" placeholder="Defina o titulo do Artigo" value=" <%= article.title %>"><br>
+                <textarea class="form-control" name="body" id="article" placeholder="Escreva o seu artigo"></textarea><br>
                 <label>Categorias</label>
                 <select class="form-control" name="category">
                     <% categories.forEach((category) => { %>
-                        <option value="<%= category.id %>"><%= category.title %></option>
+                        <% if(category.id == article.categoryId) { %>
+                            <option value="<%= category.id %>" selected> <%= category.title %> </option>
+                        <% } else { %>
+                            <option value="<%= category.id %>"> <%= category.title %> </option>
+                        <% } %>
                     <% }); %>
                 </select>
                 <br>
@@ -22,6 +27,10 @@
         </div>
         </div>
     </div>
+
+        <div id="content" style="display: none;">
+            <%- article.body %>
+        </div>
 
     <%- include ('../../partials/footer.ejs')%>
     <script src="/tinymce/tinymce/tinymce.min.js"></script>
@@ -37,6 +46,11 @@
                 'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown','importword', 'exportword', 'exportpdf',
             
                 'advlist', 'autolink', 'print', 'preview', 'hr', 'fullscreen', 'insertdatetime', 'save', 'paste', 'emoticons'
-            ]
+            ],
+            init_instance_callback: () => {
+                tinymce.activeEditor.setContent(document.getElementById('content').innerHTML);
+                //tinymce.get("article").setContent($("#content").html())
+                //tinymce.activeEditor.setContent($("#content").html())
+            }
         })
     </script>
