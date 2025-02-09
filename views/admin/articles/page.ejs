@@ -15,9 +15,15 @@
             <br>
         <% })%>
 
+        <!-- Paginação -->
         <div class="row">
             <div class="col col-12">
-
+                <% if(result.page > 2 ){ %>
+                <a style="float: left; text-decoration: none;" href="/articles/page/<%= result.page - 1 %>"><< Prev </a>
+                <% } else if(result.page == 2){ %>
+                    <a style="float: left; text-decoration: none;" href="/"><< Prev </a>
+                <% } %>
+        
                 <%   if(result.next) { %>
                     <a style="float: right; text-decoration: none;" href="/articles/page/<%= result.page + 1 %>">Next >> </a>
                 <%  } %> 

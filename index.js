@@ -5,9 +5,11 @@ const connection = require("./database/database")
 
 const categoriesController = require("./categories/CategoriesController")
 const articlesController = require("./articles/ArticlesController")
+const usersController = require("./users/UsersController")
 
 const Article = require("./articles/Article")
 const Category = require("./categories/Category")
+const User = require("./users/User")
 const { where } = require("sequelize")
 
 
@@ -34,6 +36,7 @@ connection
 // dizendo ao express pra utilizar na minha app a rota que foi criada noutro arquivo
 app.use("/", categoriesController)
 app.use("/", articlesController)
+app.use("/", usersController)
 
 //Rota da home page dos artigos
 app.get("/", (req,res) => {
