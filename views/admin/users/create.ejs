@@ -1,1 +1,19 @@
-<h1>testanto o formulario</h1>
+<%- include ('../../partials/header.ejs') %>
+<%- include ('../../partials/navbar.ejs') %>
+
+<div class="container">
+    <hr>
+    <div class="card mt-5">
+        <div class="card-header">
+            <h2>Cadastrar usuario</h2>
+        </div>
+        <div class="card-body">
+            <form method="POST" action="/users/create">
+                <input class="form-control" name="email" type="email" placeholder="email@example.com"><br>
+                <input class="form-control" name="password" type="password" placeholder="*********"><br>
+                <button type="submit" class="btn btn-success btn-block">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+</div>
+<%- include ('../../partials/footer.ejs')%>
