@@ -1,6 +1,7 @@
 const express = require("express")
 const app = express()
 const bodyParser =  require("body-parser")
+const session = require("express-session")
 const connection = require("./database/database")
 
 const categoriesController = require("./categories/CategoriesController")
@@ -15,6 +16,11 @@ const { where } = require("sequelize")
 
 // cnfiguracao do View engine
 app.set('view engine', 'ejs')
+
+// config das sessions
+app.use(session({
+    secret: "idshgihgileffjgihfksyyrgyjktjg", cookie: {maxAge: 300000}  
+}))
 
 // Arquivos estaticos, estatic 
 app.use(express.static('public')) // caminho da pasta onde ficara os arquivos estaticos
